@@ -9,7 +9,7 @@ const MenuRow = ({ menuName, href, iconName, active = false, children, ...props 
     return router.pathname === href || active;
   }, [router, active, href]);
 
-  // prettier-ignore
+  // лучше проигнорировать
   const push = useCallback(e => {
     e.preventDefault();
     router.push(e.currentTarget.href);
