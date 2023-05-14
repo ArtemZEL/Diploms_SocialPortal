@@ -12,7 +12,7 @@ const {
   removeCommentNotification
 } = require("../utilsServer/notificationActions");
 
-// CREATE A POST
+// СОЗДАНИЕ НАШИХ ПОСТОВ
 
 router.post("/", authMiddleware, async (req, res) => {
   const { text, location, picUrl } = req.body;
@@ -37,7 +37,7 @@ router.post("/", authMiddleware, async (req, res) => {
   }
 });
 
-// GET ALL POSTS
+// ВЫВОД ИЛИ ПОЛУЧЕНИЕ НАШИХ ПОСТОВ
 
 router.get("/", authMiddleware, async (req, res) => {
   const { pageNumber } = req.query;
@@ -109,7 +109,7 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-// GET POST BY ID
+// ПОЛУЧЕНИЕ НАШИХ ПОСТОВ ПО ID
 
 router.get("/:postId", authMiddleware, async (req, res) => {
   try {
@@ -128,7 +128,7 @@ router.get("/:postId", authMiddleware, async (req, res) => {
   }
 });
 
-// DELETE POST
+// УДАЛЕНИЕ ПОСТА
 
 router.delete("/:postId", authMiddleware, async (req, res) => {
   try {
@@ -162,7 +162,7 @@ router.delete("/:postId", authMiddleware, async (req, res) => {
   }
 });
 
-// LIKE A POST
+// ЛАЙК
 
 router.post("/like/:postId", authMiddleware, async (req, res) => {
   try {
@@ -196,7 +196,7 @@ router.post("/like/:postId", authMiddleware, async (req, res) => {
   }
 });
 
-// UNLIKE A POST
+// УБРАЛ ЛАЙК
 
 router.put("/unlike/:postId", authMiddleware, async (req, res) => {
   try {
@@ -233,7 +233,7 @@ router.put("/unlike/:postId", authMiddleware, async (req, res) => {
   }
 });
 
-// GET ALL LIKES OF A POST
+// ВЫВОД ВСЕХ ПОСТОВ С ЛАЙКАМИ ПО ID
 
 router.get("/like/:postId", authMiddleware, async (req, res) => {
   try {
@@ -251,7 +251,7 @@ router.get("/like/:postId", authMiddleware, async (req, res) => {
   }
 });
 
-// CREATE A COMMENT
+// СОЗДАНИЕ КОМЕНТАРИЕВ
 
 router.post("/comment/:postId", authMiddleware, async (req, res) => {
   try {
@@ -290,7 +290,7 @@ router.post("/comment/:postId", authMiddleware, async (req, res) => {
   }
 });
 
-// DELETE A COMMENT
+// СОЗДАНИЕ КОМЕНТАРИЕВ 
 
 router.delete("/comment/:postId/:commentId", authMiddleware, async (req, res) => {
   try {

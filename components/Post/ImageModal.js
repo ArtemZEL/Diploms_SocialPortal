@@ -21,13 +21,27 @@ function ImageModal({
     <>
       <Grid columns={2} stackable relaxed>
         <Grid.Column>
-          <Modal.Content image>
-            <img
-              style={{ width: "100%", height: "100%" }}
-              alt={post.user.name}
-              src={post.picUrl}
-            />
-          </Modal.Content>
+          {post.picUrl && (
+            <Modal.Content image>
+              <img
+                style={{ width: "100%", height: "100%" }}
+                alt={post.user.name}
+                src={post.picUrl}
+              />
+            </Modal.Content>
+          )}
+
+          {post.picUrl && (
+            <Modal.Content>
+              <video
+                style={{ width: "100%", height: "100%" }}
+                controls
+              >
+                <source src={post.picUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </Modal.Content>
+          )}
         </Grid.Column>
 
         <Grid.Column>

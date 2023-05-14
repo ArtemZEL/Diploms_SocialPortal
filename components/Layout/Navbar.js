@@ -13,14 +13,14 @@ function Navbar() {
         <Link href="/login">
           <Menu.Item header active={isActive("/login")}>
             <Icon size="large" name="sign in" />
-            Login
+            Логин
           </Menu.Item>
         </Link>
 
         <Link href="/signup">
           <Menu.Item header active={isActive("/signup")}>
             <Icon size="large" name="signup" />
-            Signup
+            Регистрация
           </Menu.Item>
         </Link>
       </Container>

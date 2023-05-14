@@ -15,19 +15,26 @@ function CreatePost({ user, setPosts }) {
 
   const [media, setMedia] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
+  // const [videoPreview, setvideoPreview] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
 
   const handleChange = e => {
     const { name, value, files } = e.target;
-
+  
     if (name === "media") {
       if (files && files.length > 0) {
-        setMedia(files[0]);
-        return setMediaPreview(URL.createObjectURL(files[0]));
+        const file = files[0];
+        if (file.type.startsWith("image")) {
+          setMedia(file);
+          return setMediaPreview(URL.createObjectURL(file));
+        } else if (file.type.startsWith("video")) {
+          setMedia(file);
+          return setMediaPreview(URL.createObjectURL(file));
+        }
       }
     }
-
+  
     setNewPost(prev => ({ ...prev, [name]: value }));
   };
 
@@ -121,7 +128,7 @@ function CreatePost({ user, setPosts }) {
             label="Добавить локацию"
             icon="map marker alternate"
             placeholder="Где это вы находитесь?"
-          />
+         />
 
           <input
             ref={inputRef}
@@ -129,10 +136,9 @@ function CreatePost({ user, setPosts }) {
             name="media"
             style={{ display: "none" }}
             type="file"
-            accept="image/*"
+            accept="image/*, video/*"
           />
         </Form.Group>
-
         <div
           onClick={() => inputRef.current.click()}
           style={addStyles()}
@@ -151,14 +157,22 @@ function CreatePost({ user, setPosts }) {
         >
           {media === null ? (
             <Icon name="plus" size="big" />
-          ) : (
+          ) : media.type.startsWith("image/") ? (
             <img
               style={{ height: "150px", width: "150px" }}
               src={mediaPreview}
               alt="PostImage"
             />
+          ) : (
+            <video
+              style={{ height: "150px", width: "150px" }}
+              src={mediaPreview}
+              alt="PostVideo"
+              controls
+            />
           )}
         </div>
+
 
         {mediaPreview !== null && (
           <>

@@ -2,11 +2,11 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const path = require("path");
-// OLD 
+// старый метод
 // const server = require("http").Server(app);
 // const io = require("socket.io")(server);
 
-// LATEST VERSION 
+// Получше
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
@@ -63,7 +63,7 @@ io.on("connection", socket => {
         const receiverSocket = findConnectedUser(postByUserId);
 
         if (receiverSocket && like) {
-          // WHEN YOU WANT TO SEND DATA TO ONE PARTICULAR CLIENT
+          // КОГДА ВЫ ХОТИТЕ ОТПРАВИТЬ ДАННЫЕ ОДНОМУ КОНКРЕТНОМУ ПОЛЬЗОВАТЕЛЮ
           io.to(receiverSocket.socketId).emit("newNotificationReceived", {
             name,
             profilePicUrl,
@@ -86,7 +86,7 @@ io.on("connection", socket => {
     const receiverSocket = findConnectedUser(msgSendToUserId);
 
     if (receiverSocket) {
-      // WHEN YOU WANT TO SEND MESSAGE TO A PARTICULAR SOCKET
+      // КОГДА ВЫ ХОТИТЕ ОТПРАВИТЬ СООБЩЕНИЕ НА ОПРЕДЕЛЕННЫЙ СОКЕТ
       io.to(receiverSocket.socketId).emit("newMsgReceived", { newMsg });
     }
     //
@@ -108,7 +108,7 @@ io.on("connection", socket => {
     const receiverSocket = findConnectedUser(msgSendToUserId);
 
     if (receiverSocket) {
-      // WHEN YOU WANT TO SEND MESSAGE TO A PARTICULAR SOCKET
+      // КОГДА ВЫ ХОТИТЕ ОТПРАВИТЬ СООБЩЕНИЕ В ОПРЕДЕЛЕННЫЙ СОКЕТ
       io.to(receiverSocket.socketId).emit("newMsgReceived", { newMsg });
     }
     //
