@@ -1,4 +1,3 @@
-// prettier-ignore
 const { Types: { ObjectId } } = require("mongoose");
 const ChatModel = require("../models/ChatModel");
 const UserModel = require("../models/UserModel");

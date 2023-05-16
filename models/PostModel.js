@@ -11,6 +11,7 @@ const PostSchema = new Schema(
 
     
     picUrl: { type: String },
+
     videoUrl: { type: String },
 
     likes: [{ user: { type: Schema.Types.ObjectId, ref: "User" } }],

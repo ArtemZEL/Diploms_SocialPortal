@@ -8,7 +8,7 @@ import Link from "next/link";
 import { likePost } from "../../utils/postActions";
 import LikesList from "./LikesList";
 
-function ImageModal({
+function VideoModal({
   post,
   user,
   setLikes,
@@ -21,30 +21,20 @@ function ImageModal({
     <>
       <Grid columns={2} stackable relaxed>
         <Grid.Column>
-          {post.picUrl && (
-            <Modal.Content image>
-              <img
-                style={{ width: "100%", height: "100%" }}
-                alt={post.user.name}
-                src={post.picUrl}
-              />
-            </Modal.Content>
-          )}
+          {post.videoUrl && (
+              <Modal.Content image>
+                <video
+                  style={{ width: "100%", height: "100%" }}
+                  controls
+                  src={post.videoUrl}
+                  alt="postVideo"
+                >
+                  <source src={post.videoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </Modal.Content>
+            )}
         </Grid.Column>
-
-        {/* {post.videoUrl && (
-            <Modal.Content video>
-              <video
-                style={{ width: "100%", height: "100%" }}
-                controls
-                src={post.videoUrl}
-              >
-                <source src={post.videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </Modal.Content>
-          )} */}
-
         <Grid.Column>
           <Card fluid>
             <Card.Content>
@@ -120,4 +110,4 @@ function ImageModal({
   );
 }
 
-export default ImageModal;
+export default VideoModal;

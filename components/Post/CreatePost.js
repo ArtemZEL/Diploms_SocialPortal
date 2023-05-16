@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { Form, Button, Divider, Icon } from "semantic-ui-react";
-import uploadPic from "../../utils/uploadPicToCloudinary";
+import {uploadPic,uploadVideo} from '../../utils/uploadPicToCloudinary';
 import { submitNewPost } from "../../utils/postActions";
 import CropImageModal from "./CropImageModal";
 import Avatar from "./Avatar";
@@ -10,12 +10,14 @@ function CreatePost({ user, setPosts }) {
   const [newPost, setNewPost] = useState({ text: "", location: "" });
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
+  const inputVide=useRef();
 
   const [highlighted, setHighlighted] = useState(false);
 
   const [media, setMedia] = useState(null);
+  const [video, setVideo] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
-  // const [videoPreview, setvideoPreview] = useState(null);
+  const [videoPreview, setvideoPreview] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -28,31 +30,36 @@ function CreatePost({ user, setPosts }) {
         if (file.type.startsWith("image")) {
           setMedia(file);
           return setMediaPreview(URL.createObjectURL(file));
-        } else if (file.type.startsWith("video")) {
-          setMedia(file);
-          return setMediaPreview(URL.createObjectURL(file));
+        } 
+      }
+    }
+    if (name === "video") {
+      if (files && files.length > 0) {
+        const file = files[0];
+       if (file.type.startsWith("video")) {
+          setVideo(file);
+          return setvideoPreview(URL.createObjectURL(file));
         }
       }
     }
-  
     setNewPost(prev => ({ ...prev, [name]: value }));
   };
 
   const addStyles = () => ({
     textAlign: "center",
-    height: "150px",
+    height: "250px",
     width: "150px",
     border: "dotted",
-    paddingTop: media === null && "60px",
+    paddingTop: media === null && "40px"||video===null && "40px",
     cursor: "pointer",
-    borderColor: highlighted ? "green" : "black"
   });
+  
 
   const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
     let picUrl;
-
+    let videoUrl;
     if (media) {
       picUrl = await uploadPic(media);
       if (!picUrl) {
@@ -60,9 +67,15 @@ function CreatePost({ user, setPosts }) {
         return toast.error("Ошибка загрузки изображения");
       }
     }
-
+    if (video) {
+      videoUrl = await uploadVideo(video);
+      if (!videoUrl) {
+        setLoading(false);
+        return toast.error("Ошибка загрузки видео");
+      }
+    }
     try {
-      const { data } = await submitNewPost(newPost, picUrl);
+      const { data } = await submitNewPost(newPost, picUrl,videoUrl);
 
       const createdPost = {
         ...data,
@@ -79,6 +92,11 @@ function CreatePost({ user, setPosts }) {
         setMedia(null);
         setMediaPreview(null);
         URL.revokeObjectURL(mediaPreview);
+      }
+      if (video) {
+        setVideo(null);
+        setvideoPreview(null);
+        URL.revokeObjectURL(videoPreview);
       }
     } catch (error) {
       toast.error(error);
@@ -136,7 +154,15 @@ function CreatePost({ user, setPosts }) {
             name="media"
             style={{ display: "none" }}
             type="file"
-            accept="image/*, video/*"
+            accept="image/*"
+          />
+            <input
+            ref={inputVide}
+            onChange={handleChange}
+            name="video"
+            style={{ display: "none" }}
+            type="file"
+            accept="video/*"
           />
         </Form.Group>
         <div
@@ -156,23 +182,45 @@ function CreatePost({ user, setPosts }) {
           }}
         >
           {media === null ? (
-            <Icon name="plus" size="big" />
-          ) : media.type.startsWith("image/") ? (
+            <Icon name="image" size="big" />
+          ) :  (
             <img
               style={{ height: "150px", width: "150px" }}
               src={mediaPreview}
               alt="PostImage"
             />
+          ) 
+          }
+        </div>
+        <Divider hidden />
+        <div
+          onClick={() => inputVide.current.click()}
+          style={addStyles()}
+          onDragOver={e => dragEvent(e, true)}
+          onDragLeave={e => dragEvent(e, false)}
+          onDrop={e => {
+            dragEvent(e, true);
+
+            const droppedFile = Array.from(e.dataTransfer.files);
+
+            if (droppedFile?.length > 0) {
+              setVideo(droppedFile[0]);
+              setvideoPreview(URL.createObjectURL(droppedFile[0]));
+            }
+          }}
+        >
+          {video === null ? (
+            <Icon name="video" size="big" />
           ) : (
             <video
               style={{ height: "150px", width: "150px" }}
-              src={mediaPreview}
+              src={videoPreview}
               alt="PostVideo"
               controls
+               type="video/mp4"
             />
           )}
         </div>
-
 
         {mediaPreview !== null && (
           <>

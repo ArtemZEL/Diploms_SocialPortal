@@ -11,9 +11,9 @@ export const Axios = axios.create({
 
 const toastError = error => toast.error(catchErrors(error));
 
-export const submitNewPost = async (newPost, picUrl) => {
+export const submitNewPost = async (newPost, picUrl,videoUrl) => {
   try {
-    const { data } = await Axios.post("/", { ...newPost, picUrl });
+    const { data } = await Axios.post("/", { ...newPost, picUrl,videoUrl });
 
     return { data };
   } catch (error) {

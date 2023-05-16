@@ -25,15 +25,25 @@ function PostPage({ post, errorLoading, user }) {
     <Container text>
       <Segment basic>
         <Card color="teal" fluid>
-          {post.picUrl && (
+          {post.picUrl ? (
             <img
               loading="lazy"
               src={post.picUrl}
               style={{ cursor: "pointer" }}
-              alt="PostImage"
+              alt="PostImag"
               onClick={() => setShowModal(true)}
             />
-          )}
+          ) : post.videoUrl ? (
+            <video
+              style={{ cursor: "pointer" }}
+              onClick={() => setShowModal(true)}
+              controls
+            >
+              <source src={post.videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : null}
+
 
           <Card.Content className="relative">
             <div className="flex" style={{ gap: "1rem" }}>

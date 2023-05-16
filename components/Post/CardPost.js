@@ -1,6 +1,6 @@
 import { useState } from "react";
 // prettier-ignore
-import { Card, Icon, Divider, Segment, Button, Popup, Header, Modal} from "semantic-ui-react";
+import { Card, Icon, Divider, Segment, Button, Popup, Header, Modal } from "semantic-ui-react";
 import Link from "next/link";
 import PostComments from "./PostComments";
 import CommentInputField from "./CommentInputField";
@@ -10,6 +10,7 @@ import LikesList from "./LikesList";
 import ImageModal from "./ImageModal";
 import NoImageModal from "./NoImageModal";
 import Avatar from "./Avatar";
+import VideoModal from "./VideoModal";
 
 function CardPost({ post, user, setPosts, socket }) {
   const [likes, setLikes] = useState(post.likes);
@@ -33,26 +34,62 @@ function CardPost({ post, user, setPosts, socket }) {
           onClose={() => setShowModal(false)}
         >
           <Modal.Content>
-            {post.picUrl ? (
+            {post.picUrl && !post.videoUrl ? (
               <ImageModal {...addPropsToModal} />
+            ) : post.videoUrl && !post.picUrl ? (
+              <VideoModal {...addPropsToModal} />
             ) : (
               <NoImageModal {...addPropsToModal} />
             )}
           </Modal.Content>
+
         </Modal>
       )}
 
       <Segment basic>
         <Card color="teal" fluid>
-          {post.picUrl && (
-            <img
-              loading="lazy"
-              src={post.picUrl}
-              style={{ cursor: "pointer" }}
-              alt="PostImage"
-              onClick={() => setShowModal(true)}
-            />
-          )}
+        {post.picUrl && !post.videoUrl && (
+  <img
+    loading="lazy"
+    src={post.picUrl}
+    style={{ cursor: "pointer" }}
+    alt="PostImag"
+    onClick={() => setShowModal(true)}
+  />
+)}
+
+{post.videoUrl && !post.picUrl && (
+  <video
+    style={{ cursor: "pointer" }}
+    onClick={() => setShowModal(true)}
+    controls
+  >
+    <source src={post.videoUrl} type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+)}
+
+{post.picUrl && post.videoUrl && (
+  <>
+    <img
+      loading="lazy"
+      src={post.picUrl}
+      style={{ cursor: "pointer" }}
+      alt="PostImage"
+      onClick={() => setShowModal(true)}
+    />
+    <video
+      style={{ cursor: "pointer" }}
+      onClick={() => setShowModal(true)}
+      controls
+    >
+      <source src={post.videoUrl} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </>
+)}
+
+
 
           <Card.Content className="relative">
             {(user.role === "root" || post.user._id === user._id) && (
