@@ -4,7 +4,7 @@ function useFormInput(initialState) {
   const [state, setState] = useState(initialState);
   const [media, setMedia] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
-
+  
   const handleChange = useCallback(e => {
     const { name, value, files } = e.target;
 

@@ -38,10 +38,10 @@ function Messages({ chatsData = [], user }) {
     if (divRef.current) divRef.current.scrollTop = divRef.current.scrollHeight;
   }, []);
 
-  // This ref is for persisting the state of query string in url throughout re-renders. This ref is the value of query string inside url
+  // ссылка предназначена для сохранения состояния строки запроса в URL-адресе при повторном рендеринге. Эта ссылка является значением строки запроса внутри URL-адреса.
   const openChatId = useRef("");
 
-  //CONNECTION useEffect
+  //Соединение useEffect
   useEffect(() => {
     if (user.unreadMessage) setMessageToUnread();
 
@@ -64,7 +64,7 @@ function Messages({ chatsData = [], user }) {
     }
   }, []);
 
-  // LOAD MESSAGES useEffect
+  // загрузка сообщений useEffect
   useEffect(() => {
     const loadMessages = () => {
       socket.current.emit("loadMessages", {
@@ -106,7 +106,7 @@ function Messages({ chatsData = [], user }) {
     }
   };
 
-  // Confirming msg is sent and receving the messages useEffect
+  // подтверждение отправки сообщения и получение сообщения useEffect
   useEffect(() => {
     const msgSent = ({ newMsg }) => {
       if (newMsg.receiver === openChatId.current) {
@@ -127,7 +127,7 @@ function Messages({ chatsData = [], user }) {
     const newMsgReceived = async ({ newMsg }) => {
       let senderName;
 
-      // WHEN CHAT WITH SENDER IS CURRENTLY OPENED INSIDE YOUR BROWSER
+      // КОГДА ЧАТ С ОТПРАВИТЕЛЕМ В НАСТОЯЩЕЕ ВРЕМЯ ОТКРЫТ В ВАШЕМ БРАУЗЕРЕ
       if (newMsg.sender === openChatId.current) {
         setMessages(prev => [...prev, newMsg]);
 
@@ -141,7 +141,7 @@ function Messages({ chatsData = [], user }) {
           return [...prev];
         });
       }
-      // CHECK IF CHAT PRESENT OR CREATE NEW CHAT
+      // ПРОВЕРКА, ЕСЛИ ЧАТ ПРИСУТСТВУЕТ, ИЛИ СОЗДАЙТЕ НОВЫЙ ЧАТ
       else {
         const prevIndex = chats.findIndex(chat => chat.messagesWith === newMsg.sender);
 

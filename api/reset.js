@@ -3,19 +3,19 @@ const router = express.Router();
 const UserModel = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
-const sendGridTransport = require("nodemailer-sendgrid-transport");
 const crypto = require("crypto");
 const baseUrl = require("../utils/baseUrl");
 const isEmail = require("validator/lib/isEmail");
-const options = {
+
+const transporter = nodemailer.createTransport({
+  service: "Yandex",
   auth: {
-    api_key: process.env.sendGrid_api
+    user: process.env.yandex_email,
+    pass: process.env.yandex_password
   }
-};
+});
 
-const transporter = nodemailer.createTransport(sendGridTransport(options));
-
-// CHECK USER EXISTS AND SEND EMAIL FOR RESET PASSWORD
+// ПРОВЕРКА СУЩЕСТВОВАНИЯ ПОЛЬЗОВАТЕЛЯ И ОТПРАВКА ПИСЬМА ДЛЯ СБРОСА ПАРОЛЯ
 router.post("/", async (req, res) => {
   try {
     const { email } = req.body;
@@ -41,15 +41,19 @@ router.post("/", async (req, res) => {
 
     const mailOptions = {
       to: user.email,
-      from: "singh.inder5880@gmail.com",
-      subject: "Hi there! Password reset request",
-      html: `<p>Hey ${user.name
-        .split(" ")[0]
-        .toString()}, There was a request for password reset. <a href=${href}>Click this link to reset the password </a>   </p>
-      <p>This token is valid for only 1 hour.</p>`
+      from: process.env.yandex_email,
+      subject: "Привет! Запрос на сброс пароля",
+      html: `<p>Привет, ${user.name.split(" ")[0]}! Поступил запрос на сброс пароля. <a href=${href}>Щелкните по этой ссылке для сброса пароля</a></p>
+      <p>Этот токен действителен только в течение 1 часа.</p>`
     };
 
-    transporter.sendMail(mailOptions, (err, info) => err && console.log(err));
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("Email sent successfully");
+      }
+    });
 
     return res.status(200).send("Email sent successfully");
   } catch (error) {
@@ -58,8 +62,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// VERIFY THE TOKEN AND RESET THE PASSWORD IN DB
-
+// ПРОВЕРКА ТОКЕНА И СБРОС ПАРОЛЯ В БД
 router.post("/token", async (req, res) => {
   try {
     const { token, password } = req.body;
@@ -68,8 +71,9 @@ router.post("/token", async (req, res) => {
       return res.status(401).send("Unauthorized");
     }
 
-    if (password.length < 6)
-      return res.status(401).send("Password must be atleast 6 characters");
+    if (password.length < 6) {
+      return res.status(401).send("Password must be at least 6 characters");
+    }
 
     const user = await UserModel.findOne({ resetToken: token });
 
@@ -78,7 +82,7 @@ router.post("/token", async (req, res) => {
     }
 
     if (Date.now() > user.expireToken) {
-      return res.status(401).send("Token expired.Generate new one");
+      return res.status(401).send("Token expired. Generate a new one");
     }
 
     user.password = await bcrypt.hash(password, 10);

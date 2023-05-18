@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { logoutUser } from "../../utils/authUser";
 
 function MobileHeader({ user }) {
-  const { unreadNotification, email, unreadMessage, username } = user;
+  const { unreadNotification, email, unreadMessage,unreadNews, username } = user;
   const router = useRouter();
 
   const isActive = useCallback(route => router.pathname === route, [router]);
@@ -50,6 +50,19 @@ function MobileHeader({ user }) {
         </div>
       </Menu.Item>
 
+      
+      <Menu.Item
+        {...common()}
+        href="/news"
+        active={isActive("/news") || unreadNews}
+      >
+        <div style={{ position: "relative" }}>
+          {unreadNews && <div className="menuIconBadge mobile" />}
+
+          <Icon name="newspaper outline" size="large" />
+        </div>
+      </Menu.Item>
+
       <Dropdown item icon="bars" direction="left">
         <Dropdown.Menu>
           <Dropdown.Item
@@ -58,7 +71,7 @@ function MobileHeader({ user }) {
             active={isActive(`/${username}`)}
           >
             <Icon name="user" size="large" />
-            Account
+            Профиль
           </Dropdown.Item>
 
           <Dropdown.Item
@@ -67,12 +80,12 @@ function MobileHeader({ user }) {
             active={isActive("/search")}
           >
             <Icon name="search" size="large" />
-            Search
+            Поиск
           </Dropdown.Item>
 
           <Dropdown.Item onClick={() => logoutUser(email)}>
             <Icon name="sign out alternate" size="large" />
-            Logout
+            Выйти
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

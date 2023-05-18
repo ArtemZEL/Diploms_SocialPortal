@@ -9,7 +9,7 @@ import "semantic-ui-css/semantic.min.css";
 import "react-toastify/dist/ReactToastify.min.css";
 import "../public/nprogress.css";
 import "../public/styles.css";
-
+import '../components/News/index.css';
 function MyApp({ Component, pageProps }) {
   return (
     <>
@@ -45,6 +45,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
     ctx.pathname === "/notifications" ||
     ctx.pathname === "/post/[postId]" ||
     ctx.pathname === "/messages" ||
+    ctx.pathname === "/news" ||
     ctx.pathname === "/search";
 
   if (!token) {

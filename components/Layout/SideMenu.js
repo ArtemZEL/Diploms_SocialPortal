@@ -29,7 +29,7 @@ const MenuRow = ({ menuName, href, iconName, active = false, children, ...props 
   );
 };
 
-function SideMenu({ user: { unreadNotification, email, unreadMessage, username } }) {
+function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,  unreadNews } }) {
   const router = useRouter();
 
   return (
@@ -39,12 +39,14 @@ function SideMenu({ user: { unreadNotification, email, unreadMessage, username }
 
         <MenuRow only="mobile tablet" iconName="search" href="/search" />
 
-        <MenuRow iconName="mail outline" menuName="Сообщения" href="/messages">
+        <MenuRow iconName="mail outline" 
+          menuName="Сообщения" 
+          href="/messages">
           {unreadMessage ? <div className="menuIconBadge" /> : <></>}
         </MenuRow>
 
         <MenuRow
-          menuName="Уведоомления"
+          menuName="Уведомления"
           iconName="bell outline"
           href="/notifications"
         >
@@ -52,11 +54,20 @@ function SideMenu({ user: { unreadNotification, email, unreadMessage, username }
         </MenuRow>
 
         <MenuRow
+          menuName="Новости"
+          iconName="newspaper outline"
+          href="/news"
+        >
+        {unreadNews ? <div className="menuIconBadge" /> : <></>}
+        </MenuRow>
+        <MenuRow
           menuName="Профиль"
           iconName="user"
           href={`/${username}`}
           active={router.query.username === username}
         />
+
+
 
         <MenuRow
           menuName="Выйти"
