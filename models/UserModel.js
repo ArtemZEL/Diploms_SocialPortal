@@ -23,7 +23,9 @@ const UserSchema = new Schema(
 
     resetToken: { type: String },
 
-    expireToken: { type: Date }
+    expireToken: { type: Date },
+
+    notes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Note" }],
   },
   { timestamps: true }
 );

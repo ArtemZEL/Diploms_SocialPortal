@@ -4,7 +4,7 @@ const ChatModel = require("../models/ChatModel");
 const UserModel = require("../models/UserModel");
 const authMiddleware = require("../middleware/authMiddleware");
 
-// GET ALL CHATS
+// показать чат
 
 router.get("/", authMiddleware, async (req, res) => {
   try {
@@ -33,7 +33,7 @@ router.get("/", authMiddleware, async (req, res) => {
   }
 });
 
-// GET USER INFO
+// Поиск по юзеру
 
 router.get("/user/:userToFindId", authMiddleware, async (req, res) => {
   try {
@@ -50,7 +50,7 @@ router.get("/user/:userToFindId", authMiddleware, async (req, res) => {
   }
 });
 
-// Delete a chat
+// Удаление чата
 
 router.delete(`/:messagesWith`, authMiddleware, async (req, res) => {
   try {
@@ -62,33 +62,12 @@ router.delete(`/:messagesWith`, authMiddleware, async (req, res) => {
       { $pull: { chats: { messagesWith } } }
     );
     return res.status(200).send("Chat deleted");
-
-    // const user = await ChatModel.findOne({ user: userId });
-
-    // const chatToDelete = user.chats.find(
-    //   chat => chat.messagesWith.toString() === messagesWith
-    // );
-
-    // if (!chatToDelete) {
-    //   return res.status(404).send("Chat not found");
-    // }
-
-    // const indexOf = user.chats
-    //   .map(chat => chat.messagesWith.toString())
-    //   .indexOf(messagesWith);
-
-    // user.chats.splice(indexOf, 1);
-
-    // await user.save();
-
-    // return res.status(200).send("Chat deleted");
   } catch (error) {
     console.error(error);
     return res.status(500).send("Server Error");
   }
 });
 
-// SET UNREAD MESSAGE TO READ
 
 router.post("/", authMiddleware, async (req, res) => {
   try {

@@ -8,9 +8,7 @@ export const Axios = axios.create({
   baseURL: `${baseUrl}/api/posts`,
   headers: { Authorization: cookie.get("token") }
 });
-
 const toastError = error => toast.error(catchErrors(error));
-
 export const submitNewPost = async (newPost, picUrl,videoUrl) => {
   try {
     const { data } = await Axios.post("/", { ...newPost, picUrl,videoUrl });
@@ -20,7 +18,6 @@ export const submitNewPost = async (newPost, picUrl,videoUrl) => {
     throw catchErrors(error);
   }
 };
-
 export const deletePost = async (postId, setPosts) => {
   try {
     await Axios.delete(`/${postId}`);
@@ -31,7 +28,6 @@ export const deletePost = async (postId, setPosts) => {
     toastError(error);
   }
 };
-
 export const likePost = async (postId, userId, setLikes, like = true) => {
   try {
     if (like) {
@@ -47,7 +43,6 @@ export const likePost = async (postId, userId, setLikes, like = true) => {
     toastError(error);
   }
 };
-
 export const postComment = async (postId, user, text, setComments, setText) => {
   try {
     const res = await Axios.post(`/comment/${postId}`, { text });
@@ -58,14 +53,12 @@ export const postComment = async (postId, user, text, setComments, setText) => {
       text,
       date: Date.now()
     };
-
     setComments(prev => [newComment, ...prev]);
     setText("");
   } catch (error) {
     toastError(error);
   }
 };
-
 export const deleteComment = async (postId, commentId, setComments) => {
   try {
     await Axios.delete(`/comment/${postId}/${commentId}`);

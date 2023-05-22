@@ -29,7 +29,7 @@ const MenuRow = ({ menuName, href, iconName, active = false, children, ...props 
   );
 };
 
-function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,  unreadNews } }) {
+function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,  unreadNews,unreadNotes } }) {
   const router = useRouter();
 
   return (
@@ -60,6 +60,15 @@ function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,
         >
         {unreadNews ? <div className="menuIconBadge" /> : <></>}
         </MenuRow>
+
+        <MenuRow
+          menuName="Заметки"
+          iconName="sticky note outline"
+          href="/notes"
+        >
+        {unreadNotes ? <div className="menuIconBadge" /> : <></>}
+        </MenuRow>
+
         <MenuRow
           menuName="Профиль"
           iconName="user"

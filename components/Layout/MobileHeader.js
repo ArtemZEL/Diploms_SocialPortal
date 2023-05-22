@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { logoutUser } from "../../utils/authUser";
 
 function MobileHeader({ user }) {
-  const { unreadNotification, email, unreadMessage,unreadNews, username } = user;
+  const { unreadNotification, email, unreadMessage,unreadNews, username,unreadNotes } = user;
   const router = useRouter();
 
   const isActive = useCallback(route => router.pathname === route, [router]);
@@ -60,6 +60,18 @@ function MobileHeader({ user }) {
           {unreadNews && <div className="menuIconBadge mobile" />}
 
           <Icon name="newspaper outline" size="large" />
+        </div>
+      </Menu.Item>
+
+      <Menu.Item
+        {...common()}
+        href="/notes"
+        active={isActive("/notes") || unreadNotes}
+      >
+        <div style={{ position: "relative" }}>
+          {unreadNotes && <div className="menuIconBadge mobile" />}
+
+          <Icon name="sticky note outline" size="large" />
         </div>
       </Menu.Item>
 

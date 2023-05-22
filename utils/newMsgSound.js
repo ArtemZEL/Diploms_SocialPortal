@@ -10,11 +10,6 @@ const newMsgSound = senderName => {
     setTimeout(() => {
       document.title = changeBackDocTitle;
     }, 5000);
-    // if (document.visibilityState === "visible") {
-    //   setTimeout(() => {
-    //     document.title = "Messages";
-    //   }, 5000);
-    // }
   }
 };
 

@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const fs = require("fs");
 const path = require("path");
-// старый метод
-// const server = require("http").Server(app);
-// const io = require("socket.io")(server);
+
 
 // Получше
 const { createServer } = require("http");

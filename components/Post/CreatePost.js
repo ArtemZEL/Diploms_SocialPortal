@@ -52,6 +52,7 @@ function CreatePost({ user, setPosts }) {
     border: "dotted",
     paddingTop: media === null && "40px"||video===null && "40px",
     cursor: "pointer",
+    borderColor: highlighted ? "green" : "black"
   });
   
 
