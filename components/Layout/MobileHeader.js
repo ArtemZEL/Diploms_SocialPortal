@@ -75,6 +75,18 @@ function MobileHeader({ user }) {
         </div>
       </Menu.Item>
 
+
+      <Menu.Item
+        {...common()}
+        href="/about"
+        active={isActive("/about") || unreadNotes}
+      >
+        <div style={{ position: "relative" }}>
+          {unreadNotes && <div className="menuIconBadge mobile" />}
+
+          <Icon name="sticky note outline" size="large" />
+        </div>
+      </Menu.Item>
       <Dropdown item icon="bars" direction="left">
         <Dropdown.Menu>
           <Dropdown.Item

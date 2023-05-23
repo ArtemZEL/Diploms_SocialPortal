@@ -70,6 +70,13 @@ function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,
         </MenuRow>
 
         <MenuRow
+          menuName="О приложении"
+          iconName="sticky note outline"
+          href="/about"
+        >
+        {unreadNotes ? <div className="menuIconBadge" /> : <></>}
+        </MenuRow>
+        <MenuRow
           menuName="Профиль"
           iconName="user"
           href={`/${username}`}

@@ -20,12 +20,13 @@ router.get('/', async (req, res) => {
 // Добавление новой заметки
 router.post('/', async (req, res) => {
   try {
-    const { title, description, tags } = req.body;
+    const { title, description, tags,color } = req.body;
     const newNote = new Note({
       user: req.userId,
       title,
       description,
-      tags
+      tags,
+      color
     });
     const savedNote = await newNote.save();
     res.status(201).json({ note: savedNote });
@@ -39,13 +40,14 @@ router.post('/', async (req, res) => {
 router.put('/:noteId', async (req, res) => {
   try {
     const { noteId } = req.params;
-    const { title, description, tags } = req.body;
+    const { title, description, tags,color } = req.body;
     const updatedNote = await Note.findByIdAndUpdate(
       noteId,
       {
         title,
         description,
-        tags
+        tags,
+        color
       },
       { new: true }
     );

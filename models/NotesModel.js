@@ -24,7 +24,7 @@ const NoteSchema = new Schema({
   },
   color:{
     type: String,
-    required: true
+    required: true  
   }
 });
 

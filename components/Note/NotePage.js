@@ -4,9 +4,10 @@ import axios from '../../utils/noteAction';
 
 const NotePage = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState({ title: '', description: '', tags: '', color: 'blue' });
+  const [newNote, setNewNote] = useState({ title: '', description: '', tags: '', color: '' });
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editNote, setEditNote] = useState({});
+  const [selectedColor, setSelectedColor] = useState('');
 
   useEffect(() => {
     getAllNotes();
@@ -23,13 +24,15 @@ const NotePage = () => {
 
   const addNewNote = async () => {
     try {
-      const { data } = await axios.post('/', newNote);
+      const noteWithColor = { ...newNote, color: selectedColor };
+      const { data } = await axios.post('/', noteWithColor);
       setNotes([...notes, data.note]);
-      setNewNote({ title: '', description: '', tags: '', color: 'blue' });
+      setNewNote({ title: '', description: '', tags: '', color: '' });
     } catch (error) {
       console.error(error);
     }
   };
+  
 
   const updateNote = async (noteId, updatedNote) => {
     try {
@@ -84,10 +87,23 @@ const NotePage = () => {
     }
   };
 
-  const handleColorChange = (noteId, color) => {
-    const updatedNote = { ...notes.find((note) => note._id === noteId), color };
-    updateNote(noteId, updatedNote);
+  const handleColorChange = async (noteId, color) => {
+    try {
+      const updatedNotes = notes.map((note) => {
+        if (note._id === noteId) {
+          return { ...note, color };
+        }
+        return note;
+      });
+      setNotes(updatedNotes);
+      
+      const updatedNote = { ...notes.find((note) => note._id === noteId), color };
+      await updateNote(noteId, updatedNote);
+    } catch (error) {
+      console.error(error);
+    }
   };
+  
 
   return (
     <Grid centered columns={2}>
@@ -97,8 +113,8 @@ const NotePage = () => {
             {notes.map((note) => (
               <Card
                 key={note._id}
-                color={note.color}
                 className="note-card"
+                style={{ backgroundColor: note.color || 'red', color: 'white' }}
               >
                 <Card.Content>
                   <Card.Header>{note.title}</Card.Header>
@@ -156,7 +172,7 @@ const NotePage = () => {
                         color="blue"
                         onClick={saveEditedNote}
                       >
-                        Save
+                        Update
                       </Button>
                     </Modal.Actions>
                   </Modal>
@@ -188,14 +204,14 @@ const NotePage = () => {
             <Form.Select
               label="Color"
               name="color"
-              value={newNote.color}
+              value={selectedColor}
               options={[
                 { key: 'blue', value: 'blue', text: 'Blue' },
                 { key: 'red', value: 'red', text: 'Red' },
                 { key: 'green', value: 'green', text: 'Green' },
                 { key: 'yellow', value: 'yellow', text: 'Yellow' },
               ]}
-              onChange={(e, { value }) => setNewNote((prevNote) => ({ ...prevNote, color: value }))}
+              onChange={(e, { value }) => setSelectedColor(value)}
             />
             <Button primary onClick={addNewNote}>
               Add Note
