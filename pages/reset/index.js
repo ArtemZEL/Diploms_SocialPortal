@@ -39,7 +39,7 @@ function ResetPage() {
           attached
           icon="mail"
           header="Check Your Inbox"
-          content="Please check your inbox for further instructions"
+          content="Пожалуйста, проверьте свой почтовый ящик для получения дальнейших инструкций"
           success
         />
       ) : (
@@ -56,7 +56,7 @@ function ResetPage() {
             type="email"
             iconPosition="left"
             label="Email"
-            placeholder="Enter email address"
+            placeholder="Введите адрес электронной почты"
             name="email"
             onChange={e => setEmail(e.target.value)}
             value={email}
@@ -68,7 +68,7 @@ function ResetPage() {
             icon="configure"
             type="submit"
             color="orange"
-            content="Submit"
+            content="Отправить"
           />
         </Segment>
       </Form>

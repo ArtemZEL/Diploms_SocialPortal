@@ -1,9 +1,21 @@
 import React from 'react'
+import AboutExample from '../components/About/Example/AboutExample'
+import ChatExample from '../components/About/Example/ChatExample'
+import PostExample from '../components/About/Example/PostExample'
+import NoteExample from '../components/About/Example/NoteExample'
+import NotificationExample from '../components/About/Example/NotificationExample'
 
-function about() {
+function About() {
   return (
-    <div>about</div>
+    <div>
+      <AboutExample/>
+      <PostExample/>
+      <ChatExample/>
+      <NoteExample/>
+      <NotificationExample/>
+    </div>
+
   )
 }
 
-export default about
+export default About

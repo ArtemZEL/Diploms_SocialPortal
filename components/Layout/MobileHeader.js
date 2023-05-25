@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { logoutUser } from "../../utils/authUser";
 
 function MobileHeader({ user }) {
-  const { unreadNotification, email, unreadMessage,unreadNews, username,unreadNotes } = user;
+  const { unreadNotification, email, unreadMessage, unreadNews, username, unreadNotes, underAbout,underRepost} = user;
   const router = useRouter();
 
   const isActive = useCallback(route => router.pathname === route, [router]);
@@ -50,45 +50,45 @@ function MobileHeader({ user }) {
         </div>
       </Menu.Item>
 
-      
-      <Menu.Item
-        {...common()}
-        href="/news"
-        active={isActive("/news") || unreadNews}
-      >
-        <div style={{ position: "relative" }}>
-          {unreadNews && <div className="menuIconBadge mobile" />}
-
-          <Icon name="newspaper outline" size="large" />
-        </div>
-      </Menu.Item>
-
-      <Menu.Item
-        {...common()}
-        href="/notes"
-        active={isActive("/notes") || unreadNotes}
-      >
-        <div style={{ position: "relative" }}>
-          {unreadNotes && <div className="menuIconBadge mobile" />}
-
-          <Icon name="sticky note outline" size="large" />
-        </div>
-      </Menu.Item>
-
-
-      <Menu.Item
-        {...common()}
-        href="/about"
-        active={isActive("/about") || unreadNotes}
-      >
-        <div style={{ position: "relative" }}>
-          {unreadNotes && <div className="menuIconBadge mobile" />}
-
-          <Icon name="sticky note outline" size="large" />
-        </div>
-      </Menu.Item>
+    {/* Гамбурнер меню*/}
       <Dropdown item icon="bars" direction="left">
         <Dropdown.Menu>
+          <Dropdown.Item
+            {...common(false)}
+            href="/news"
+            active={isActive("/news") || unreadNews}
+          >
+            <Icon name="newspaper outline" size="large" />
+            Новости
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            {...common(false)}
+            href="/notes"
+            active={isActive("/notes") || unreadNotes}
+          >
+            <Icon name="sticky note outline" size="large" />
+            Заметки
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            {...common(false)}
+            href="/repost"
+            active={isActive("/repost") || underRepost}
+          >
+            <Icon name="sticky note outline" size="large" />
+            Заметки
+          </Dropdown.Item>
+
+          <Dropdown.Item
+            {...common(false)}
+            href="/about"
+            active={isActive("/about") || underAbout}
+          >
+            <Icon name="question circle outline" size="large" />
+            Информация
+          </Dropdown.Item>
+
           <Dropdown.Item
             {...common(false)}
             href={`/${username}`}
