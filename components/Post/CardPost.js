@@ -48,46 +48,48 @@ function CardPost({ post, user, setPosts, socket }) {
 
       <Segment basic>
         <Card color="teal" fluid>
-        {post.picUrl && !post.videoUrl && (
-  <img
-    loading="lazy"
-    src={post.picUrl}
-    style={{ cursor: "pointer" }}
-    alt="PostImag"
-    onClick={() => setShowModal(true)}
-  />
-)}
+          {post.picUrl && !post.videoUrl && (
+            <img
+              loading="lazy"
+              src={post.picUrl}
+              style={{ cursor: "pointer" }}
+              alt="PostImag"
+              onClick={() => setShowModal(true)}
+            />
+          )}
 
-{post.videoUrl && !post.picUrl && (
-  <video
-    style={{ cursor: "pointer" }}
-    onClick={() => setShowModal(true)}
-    controls
-  >
-    <source src={post.videoUrl} type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-)}
+          {post.videoUrl && !post.picUrl && (
+            <video
+              style={{ cursor: "default", width: "100%", height: "100%"}}
+              onClick={() => setShowModal(true)}
+              controls
+              autoPlay={false} // Добавленный атрибут
+            >
+              <source src={post.videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
 
-{post.picUrl && post.videoUrl && (
-  <>
-    <img
-      loading="lazy"
-      src={post.picUrl}
-      style={{ cursor: "pointer" }}
-      alt="PostImage"
-      onClick={() => setShowModal(true)}
-    />
-    <video
-      style={{ cursor: "pointer" }}
-      onClick={() => setShowModal(true)}
-      controls
-    >
-      <source src={post.videoUrl} type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
-  </>
-)}
+          {post.picUrl && post.videoUrl && (
+            <>
+              <img
+                loading="lazy"
+                src={post.picUrl}
+                style={{ cursor: "pointer" }}
+                alt="PostImage"
+                onClick={() => setShowModal(true)}
+              />
+              <video
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowModal(true)}
+                controls
+                autoPlay={false} // Добавленный атрибут
+              >
+                <source src={post.videoUrl} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </>
+          )}
 
 
 

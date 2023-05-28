@@ -186,7 +186,7 @@ function CreatePost({ user, setPosts }) {
             <Icon name="image" size="big" />
           ) :  (
             <img
-              style={{ height: "150px", width: "150px" }}
+              style={{ height: "100px", width: "100px" }}
               src={mediaPreview}
               alt="PostImage"
             />
@@ -214,11 +214,12 @@ function CreatePost({ user, setPosts }) {
             <Icon name="video" size="big" />
           ) : (
             <video
-              style={{ height: "150px", width: "150px" }}
+              style={{ height: "100px", width: "100px" }}
               src={videoPreview}
               alt="PostVideo"
               controls
-               type="video/mp4"
+              type="video/mp4"
+              
             />
           )}
         </div>
@@ -228,7 +229,7 @@ function CreatePost({ user, setPosts }) {
             <Divider hidden />
 
             <Button
-              content="Crop Image"
+              content="Обрезать изображение"
               type="button"
               primary
               circular

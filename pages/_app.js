@@ -11,7 +11,7 @@ import "../public/nprogress.css";
 import "../public/styles.css";
 import '../components/News/index.css';
 import '../components/Note/index.css';
-
+import '../components/About/style.css';
 
 function MyApp({ Component, pageProps }) {
   return (

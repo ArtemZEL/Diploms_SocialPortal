@@ -10,11 +10,11 @@ export const NoProfilePosts = () => (
 export const NoFollowData = ({ followersComponent, followingComponent }) => (
   <>
     {followersComponent && (
-      <Message icon="user outline" info content={`User does not have followers`} />
+      <Message icon="user outline" info content={`У пользователя нет подписчиков`} />
     )}
 
     {followingComponent && (
-      <Message icon="user outline" info content={`User does not follow any users`} />
+      <Message icon="user outline" info content={`Пользователь не подписан ни на одного пользователя`} />
     )}
   </>
 );

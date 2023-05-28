@@ -5,7 +5,7 @@ function NewsGrid({ items }) {
   return (
     <div className='news-grid'>
         {items.map((item, i) => (
-            <NewsItems key={i} item={item} /> // Замените items на item
+            <NewsItems key={i} item={item} />
         ))}
     </div>
   );

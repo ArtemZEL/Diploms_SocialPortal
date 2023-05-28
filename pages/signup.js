@@ -129,8 +129,8 @@ function Signup() {
           />
           <Form.Input
             required
-            label="Name"
-            placeholder="Name"
+            label="Имя"
+            placeholder="Имя"
             name="name"
             value={name}
             onChange={handleChange}
@@ -141,8 +141,8 @@ function Signup() {
 
           <Form.Input
             required
-            label="Email"
-            placeholder="Email"
+            label="Почта"
+            placeholder="Почта"
             name="email"
             value={email}
             onChange={handleChange}
@@ -153,7 +153,7 @@ function Signup() {
           />
 
           <Form.Input
-            label="Password"
+            label="Пароль"
             placeholder="Пароль"
             name="password"
             value={password}

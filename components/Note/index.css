@@ -1,6 +1,6 @@
 .note-card {
     margin-bottom: 20px;
-    color: white; /* Устанавливаем белый цвет текста */
+    color: rgb(255, 255, 255); /* Устанавливаем белый цвет текста */
   }
   
   .edit-modal {

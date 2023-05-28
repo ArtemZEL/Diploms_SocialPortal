@@ -76,8 +76,8 @@ function MobileHeader({ user }) {
             href="/repost"
             active={isActive("/repost") || underRepost}
           >
-            <Icon name="sticky note outline" size="large" />
-            Заметки
+            <Icon name="reply all" size="large" />
+            Репост
           </Dropdown.Item>
 
           <Dropdown.Item

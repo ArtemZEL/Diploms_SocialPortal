@@ -35,7 +35,7 @@ function PostPage({ post, errorLoading, user }) {
             />
           ) : post.videoUrl ? (
             <video
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "default" }}
               onClick={() => setShowModal(true)}
               controls
             >

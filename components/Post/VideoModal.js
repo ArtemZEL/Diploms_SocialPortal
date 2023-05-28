@@ -28,9 +28,10 @@ function VideoModal({
                   controls
                   src={post.videoUrl}
                   alt="postVideo"
+                  autoPlay={false} // Добавленный атрибут
                 >
                   <source src={post.videoUrl} type="video/mp4" />
-                  Your browser does not support the video tag.
+                  Ваш браузер не поддерживает видео.
                 </video>
               </Modal.Content>
             )}

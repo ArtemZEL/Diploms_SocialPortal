@@ -70,7 +70,7 @@ function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,
         </MenuRow>
         <MenuRow
           menuName="Репост"
-          iconName="sticky note outline"
+          iconName="reply all"
           href="/repost"
         >
         {underRepost ? <div className="menuIconBadge" /> : <></>}

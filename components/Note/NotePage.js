@@ -117,10 +117,10 @@ const NotePage = () => {
                 style={{ backgroundColor: note.color || 'red', color: 'white' }}
               >
                 <Card.Content>
-                  <Card.Header>{note.title}</Card.Header>
-                  <Card.Meta>{note.date}</Card.Meta>
-                  <Card.Description>{note.description}</Card.Description>
-                  <Card.Meta>{note.tags}</Card.Meta>
+                  <Card.Header>Заголовок: {note.title}</Card.Header>
+                  <Card.Meta>Дата: {note.date}</Card.Meta>
+                  <Card.Description>Описание: {note.description}</Card.Description>
+                  <Card.Meta>Теги: {note.tags}</Card.Meta>
                 </Card.Content>
                 <Card.Content extra>
                   <Button
@@ -143,23 +143,23 @@ const NotePage = () => {
                     size="tiny"
                     className="edit-modal"
                   >
-                    <Modal.Header>Edit Note</Modal.Header>
+                    <Modal.Header>Редактировать заметку</Modal.Header>
                     <Modal.Content>
                       <Form>
                         <Form.Input
-                          label="Title"
+                          label="Заголовок"
                           name="title"
                           value={editNote.title || ''}
                           onChange={handleEditInputChange}
                         />
                         <Form.Input
-                          label="Description"
+                          label="Описание"
                           name="description"
                           value={editNote.description || ''}
                           onChange={handleEditInputChange}
                         />
                         <Form.Input
-                          label="Tags"
+                          label="Теги"
                           name="tags"
                           value={editNote.tags || ''}
                           onChange={handleEditInputChange}
@@ -167,12 +167,12 @@ const NotePage = () => {
                       </Form>
                     </Modal.Content>
                     <Modal.Actions>
-                      <Button onClick={closeEditModal}>Cancel</Button>
+                      <Button onClick={closeEditModal}>Отмена</Button>
                       <Button
                         color="blue"
                         onClick={saveEditedNote}
                       >
-                        Update
+                        Обновить
                       </Button>
                     </Modal.Actions>
                   </Modal>
@@ -184,37 +184,37 @@ const NotePage = () => {
         <Grid.Column>
           <Form>
             <Form.Input
-              label="Title"
+              label="Заголовок"
               name="title"
               value={newNote.title}
               onChange={handleInputChange}
             />
             <Form.Input
-              label="Description"
+              label="Описание"
               name="description"
               value={newNote.description}
               onChange={handleInputChange}
             />
             <Form.Input
-              label="Tags"
+              label="Теги"
               name="tags"
               value={newNote.tags}
               onChange={handleInputChange}
             />
             <Form.Select
-              label="Color"
+              label="Цвет"
               name="color"
               value={selectedColor}
               options={[
-                { key: 'blue', value: 'blue', text: 'Blue' },
-                { key: 'red', value: 'red', text: 'Red' },
-                { key: 'green', value: 'green', text: 'Green' },
-                { key: 'yellow', value: 'yellow', text: 'Yellow' },
+                { key: 'blue', value: 'blue', text: 'Синий' },
+                { key: 'red', value: 'red', text: 'Красный' },
+                { key: 'green', value: 'green', text: 'Зеленый' },
+                { key: 'yellow', value: 'yellow', text: 'Желтый' },
               ]}
               onChange={(e, { value }) => setSelectedColor(value)}
             />
-            <Button primary onClick={addNewNote}>
-              Add Note
+            <Button primary onClick={addNewNote} style={{backgroundColor:"green"}}>
+              Добавить заметку
             </Button>
           </Form>
         </Grid.Column>

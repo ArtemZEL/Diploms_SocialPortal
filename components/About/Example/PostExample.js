@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../AboutProg';
+import ModalInformation from '../AboutProg';
 
 function ChatExample() {
   const [isModal, setModal] = useState(false);
@@ -10,9 +10,9 @@ function ChatExample() {
       <div className='modalW'>
         <button onClick={() => setModal(true)}>Создание поста</button>
       </div>
-      <Modal
+      <ModalInformation
         visible={isModal}
-        title="Создание поста"
+        title={<h2 style={{textAlign:"center"}}>Создание поста</h2>}
         content={
           <div>
             <p>Содержимое модального окна</p>

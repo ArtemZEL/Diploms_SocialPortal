@@ -32,19 +32,6 @@ function ImageModal({
           )}
         </Grid.Column>
 
-        {/* {post.videoUrl && (
-            <Modal.Content video>
-              <video
-                style={{ width: "100%", height: "100%" }}
-                controls
-                src={post.videoUrl}
-              >
-                <source src={post.videoUrl} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </Modal.Content>
-          )} */}
-
         <Grid.Column>
           <Card fluid>
             <Card.Content>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../AboutProg';
+import ModalInformation from '../AboutProg';
 
 
 function AboutExample() {
@@ -12,12 +12,12 @@ function AboutExample() {
      <div className='modalW'>
       <button onClick={() => setModal(true)} >О программе</button>
      </div>
-      <Modal
+      <ModalInformation
         visible={isModal}
-        title="О программе"
+        title={<h2 style={{textAlign:"center"}}>О программе</h2>}
         content={
          <div>
-            <p>Вас приветствует веб-приложение <b>"Белстат-портал"</b>. Здесь вы можете работать в команде, создавать публикации и получать доступ к широкому спектру возможностей к порталу.</p>
+            <p>Вас приветствует веб-приложение <b>"Белстат-портал"</b>. Здесь вы можете работать в команде, создавать публикации и получать доступ к широкому спектру возможностей портала.</p>
             <img className="modal-image" src="https://res.cloudinary.com/dkk8nrpkj/image/upload/v1685043522/Welcome_xfma0o.png" alt="Описание изображения" />
          </div>
          

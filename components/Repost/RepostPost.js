@@ -1,9 +1,9 @@
 import React from 'react'
 
-function repost() {
+function RepostPost() {
   return (
     <div>repost</div>
   )
 }
 
-export default repost
+export default RepostPost

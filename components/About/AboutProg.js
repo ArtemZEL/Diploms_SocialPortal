@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Modal = ({ visible = false, title = '', content = '', footer = '', onClose }) => {
+const ModalInformation = ({ visible = false, title = '', content = '', footer = '', onClose }) => {
   const onKeydown = ({ key }) => {
     if (key === 'Escape') {
       onClose();
@@ -15,8 +15,8 @@ const Modal = ({ visible = false, title = '', content = '', footer = '', onClose
   if (!visible) return null;
 
   return (
-    <div className="modal" onClick={onClose}>
-      <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+    <div className="modals">
+      <div className="modal-dialog">
         <div className="modal-header">
           <h3 className="modal-title">{title}</h3>
           <span className="modal-close" onClick={onClose}>
@@ -32,4 +32,4 @@ const Modal = ({ visible = false, title = '', content = '', footer = '', onClose
   );
 };
 
-export default Modal;
+export default ModalInformation;
