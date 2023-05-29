@@ -69,13 +69,6 @@ function SideMenu({ user: { unreadNotification, email, unreadMessage, username ,
         {unreadNotes ? <div className="menuIconBadge" /> : <></>}
         </MenuRow>
         <MenuRow
-          menuName="Репост"
-          iconName="reply all"
-          href="/repost"
-        >
-        {underRepost ? <div className="menuIconBadge" /> : <></>}
-        </MenuRow>
-        <MenuRow
           menuName="Информация"
           iconName="question circle outline"
           href="/about"

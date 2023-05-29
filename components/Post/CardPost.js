@@ -1,5 +1,4 @@
-import { useState } from "react";
-// prettier-ignore
+import React, { useState } from "react";
 import { Card, Icon, Divider, Segment, Button, Popup, Header, Modal } from "semantic-ui-react";
 import Link from "next/link";
 import PostComments from "./PostComments";
@@ -14,25 +13,15 @@ import VideoModal from "./VideoModal";
 
 function CardPost({ post, user, setPosts, socket }) {
   const [likes, setLikes] = useState(post.likes);
-
-  const isLiked = likes.some(like => like.user === user._id);
-
+  const isLiked = likes.some((like) => like.user === user._id);
   const [comments, setComments] = useState(post.comments);
-
   const [showModal, setShowModal] = useState(false);
-
-  // 
   const addPropsToModal = { post, user, setLikes, likes, isLiked, comments, setComments };
 
   return (
     <>
       {showModal && (
-        <Modal
-          open={showModal}
-          closeIcon
-          closeOnDimmerClick
-          onClose={() => setShowModal(false)}
-        >
+        <Modal open={showModal} closeIcon closeOnDimmerClick onClose={() => setShowModal(false)}>
           <Modal.Content>
             {post.picUrl && !post.videoUrl ? (
               <ImageModal {...addPropsToModal} />
@@ -42,7 +31,6 @@ function CardPost({ post, user, setPosts, socket }) {
               <NoImageModal {...addPropsToModal} />
             )}
           </Modal.Content>
-
         </Modal>
       )}
 
@@ -60,7 +48,7 @@ function CardPost({ post, user, setPosts, socket }) {
 
           {post.videoUrl && !post.picUrl && (
             <video
-              style={{ cursor: "default", width: "100%", height: "100%"}}
+              style={{ cursor: "default", width: "100%", height: "100%" }}
               onClick={() => setShowModal(true)}
               controls
               autoPlay={false} // Добавленный атрибут
@@ -91,8 +79,6 @@ function CardPost({ post, user, setPosts, socket }) {
             </>
           )}
 
-
-
           <Card.Content className="relative">
             {(user.role === "root" || post.user._id === user._id) && (
               <div style={{ position: "absolute", right: "10px" }}>
@@ -111,7 +97,7 @@ function CardPost({ post, user, setPosts, socket }) {
                   }
                 >
                   <Header as="h4" content="Вы уверены?" />
-                  <p>Потом востановить невозможно</p>
+                  <p>Потом восстановить невозможно</p>
 
                   <Button
                     color="red"
@@ -136,9 +122,16 @@ function CardPost({ post, user, setPosts, socket }) {
               </div>
             </div>
 
-            <Card.Description className="cardDescription">
-              {post.text}
+            <Card.Description>
+              {post.repostUrl && (
+                <a href={post.repostUrl} target="_blank" rel="noopener noreferrer">
+                  <Icon name="retweet" color="teal" />
+                  Reposted from: {post.repostUrl}
+                </a>
+              )}
             </Card.Description>
+
+            <Card.Description className="cardDescription">{post.text}</Card.Description>
           </Card.Content>
 
           <Card.Content extra>
@@ -151,16 +144,14 @@ function CardPost({ post, user, setPosts, socket }) {
                   socket.current.emit("likePost", {
                     postId: post._id,
                     userId: user._id,
-                    like: isLiked ? false : true
+                    like: isLiked ? false : true,
                   });
 
                   socket.current.on("postLiked", () => {
                     if (isLiked) {
-                      setLikes(prev => prev.filter(like => like.user !== user._id));
-                    }
-                    //
-                    else {
-                      setLikes(prev => [...prev, { user: user._id }]);
+                      setLikes((prev) => prev.filter((like) => like.user !== user._id));
+                    } else {
+                      setLikes((prev) => [...prev, { user: user._id }]);
                     }
                   });
                 } else {
@@ -182,18 +173,17 @@ function CardPost({ post, user, setPosts, socket }) {
 
             <Icon name="comment outline" style={{ marginLeft: "7px" }} color="blue" />
 
-            {comments.map(
-              (comment, i) =>
-                i < 3 && (
-                  <PostComments
-                    key={comment._id}
-                    comment={comment}
-                    postId={post._id}
-                    user={user}
-                    setComments={setComments}
-                  />
-                )
-            )}
+            {comments.map((comment, i) => (
+              i < 3 && (
+                <PostComments
+                  key={comment._id}
+                  comment={comment}
+                  postId={post._id}
+                  user={user}
+                  setComments={setComments}
+                />
+              )
+            ))}
 
             {comments.length > 3 && (
               <Button
@@ -207,11 +197,7 @@ function CardPost({ post, user, setPosts, socket }) {
 
             <Divider hidden />
 
-            <CommentInputField
-              user={user}
-              postId={post._id}
-              setComments={setComments}
-            />
+            <CommentInputField user={user} postId={post._id} setComments={setComments} />
           </Card.Content>
         </Card>
       </Segment>

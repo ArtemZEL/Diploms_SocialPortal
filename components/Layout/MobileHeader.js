@@ -70,16 +70,6 @@ function MobileHeader({ user }) {
             <Icon name="sticky note outline" size="large" />
             Заметки
           </Dropdown.Item>
-
-          <Dropdown.Item
-            {...common(false)}
-            href="/repost"
-            active={isActive("/repost") || underRepost}
-          >
-            <Icon name="reply all" size="large" />
-            Репост
-          </Dropdown.Item>
-
           <Dropdown.Item
             {...common(false)}
             href="/about"

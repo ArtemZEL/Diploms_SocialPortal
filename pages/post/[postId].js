@@ -14,16 +14,25 @@ import { NoPostFound } from "../../components/Layout/NoData";
 
 function PostPage({ post, errorLoading, user }) {
   const [likes, setLikes] = useState(post.likes);
-
-  const isLiked = likes.some(like => like.user === user._id);
-
   const [comments, setComments] = useState(post.comments);
+
+  const isLiked = likes.some((like) => like.user === user._id);
 
   if (errorLoading) return <NoPostFound />;
 
   return (
     <Container text>
       <Segment basic>
+        {post.repostUrl && (
+          <Card color="teal" fluid>
+            <Card.Content>
+              <Icon name="retweet" color="green" />{" "}
+              <strong>{post.user.name}</strong> сделал репост:
+            </Card.Content>
+            <PostPage post={post.repostUrl} errorLoading={false} user={user} />
+          </Card>
+        )}
+
         <Card color="teal" fluid>
           {post.picUrl ? (
             <img
@@ -40,10 +49,9 @@ function PostPage({ post, errorLoading, user }) {
               controls
             >
               <source src={post.videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
+              Ваш браузер не поддерживает видео тег.
             </video>
           ) : null}
-
 
           <Card.Content className="relative">
             <div className="flex" style={{ gap: "1rem" }}>
@@ -51,7 +59,9 @@ function PostPage({ post, errorLoading, user }) {
 
               <div>
                 <h4 style={{ marginBottom: "2px" }}>
-                  <Link href={`/${post.user.username}`}>{post.user.name}</Link>
+                  <Link href={`/${post.user.username}`}>
+                    {post.user.name}
+                  </Link>
                 </h4>
                 <Card.Meta>{calculateTime(post.createdAt)}</Card.Meta>
 
@@ -79,7 +89,9 @@ function PostPage({ post, errorLoading, user }) {
               trigger={
                 likes.length > 0 && (
                   <span className="spanLikesList">
-                    {`${likes.length} ${likes.length === 1 ? "like" : "likes"}`}
+                    {`${likes.length} ${
+                      likes.length === 1 ? "лайк" : "лайков"
+                    }`}
                   </span>
                 )
               }
@@ -87,7 +99,7 @@ function PostPage({ post, errorLoading, user }) {
 
             <Icon name="comment outline" style={{ marginLeft: "7px" }} color="blue" />
 
-            {comments.map(comment => (
+            {comments.map((comment) => (
               <PostComments
                 key={comment._id}
                 comment={comment}
@@ -112,13 +124,13 @@ function PostPage({ post, errorLoading, user }) {
   );
 }
 
-export const getServerSideProps = async ctx => {
+export const getServerSideProps = async (ctx) => {
   try {
     const { postId } = ctx.query;
     const { token } = parseCookies(ctx);
 
     const res = await axios.get(`${baseUrl}/api/posts/${postId}`, {
-      headers: { Authorization: token }
+      headers: { Authorization: token },
     });
 
     return { props: { post: res.data } };

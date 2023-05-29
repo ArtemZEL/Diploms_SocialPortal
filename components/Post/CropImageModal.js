@@ -70,7 +70,7 @@ function CropImageModal({ mediaPreview, setMedia, showModal, setShowModal }) {
               <div>
                 <Header as="h2">
                   <Icon name="file image outline" />
-                  <Header.Content content="Final" />
+                  <Header.Content content="Окончательный вид" />
                 </Header>
 
                 <div>

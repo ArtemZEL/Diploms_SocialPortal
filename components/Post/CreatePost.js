@@ -1,48 +1,48 @@
-import { useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { toast } from "react-toastify";
-import { Form, Button, Divider, Icon } from "semantic-ui-react";
-import {uploadPic,uploadVideo} from '../../utils/uploadPicToCloudinary';
+import { Form, Button, Divider, Icon, Embed } from "semantic-ui-react";
+import { uploadPic, uploadVideo } from "../../utils/uploadPicToCloudinary";
 import { submitNewPost } from "../../utils/postActions";
 import CropImageModal from "./CropImageModal";
 import Avatar from "./Avatar";
 
 function CreatePost({ user, setPosts }) {
-  const [newPost, setNewPost] = useState({ text: "", location: "" });
+  const [newPost, setNewPost] = useState({ text: "", location: "", repost: "" });
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
-  const inputVide=useRef();
+  const inputVideo = useRef();
 
   const [highlighted, setHighlighted] = useState(false);
 
   const [media, setMedia] = useState(null);
   const [video, setVideo] = useState(null);
   const [mediaPreview, setMediaPreview] = useState(null);
-  const [videoPreview, setvideoPreview] = useState(null);
+  const [videoPreview, setVideoPreview] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value, files } = e.target;
-  
+
     if (name === "media") {
       if (files && files.length > 0) {
         const file = files[0];
         if (file.type.startsWith("image")) {
           setMedia(file);
           return setMediaPreview(URL.createObjectURL(file));
-        } 
+        }
       }
     }
     if (name === "video") {
       if (files && files.length > 0) {
         const file = files[0];
-       if (file.type.startsWith("video")) {
+        if (file.type.startsWith("video")) {
           setVideo(file);
-          return setvideoPreview(URL.createObjectURL(file));
+          return setVideoPreview(URL.createObjectURL(file));
         }
       }
     }
-    setNewPost(prev => ({ ...prev, [name]: value }));
+    setNewPost((prev) => ({ ...prev, [name]: value }));
   };
 
   const addStyles = () => ({
@@ -50,13 +50,12 @@ function CreatePost({ user, setPosts }) {
     height: "250px",
     width: "150px",
     border: "dotted",
-    paddingTop: media === null && "40px"||video===null && "40px",
+    paddingTop: (media === null && "40px") || (video === null && "40px"),
     cursor: "pointer",
-    borderColor: highlighted ? "green" : "black"
+    borderColor: highlighted ? "green" : "black",
   });
-  
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     let picUrl;
@@ -76,18 +75,18 @@ function CreatePost({ user, setPosts }) {
       }
     }
     try {
-      const { data } = await submitNewPost(newPost, picUrl,videoUrl);
+      const { data } = await submitNewPost(newPost, picUrl, videoUrl, newPost.repost); // Pass the repost URL here
 
       const createdPost = {
         ...data,
         user,
         likes: [],
-        comments: []
+        comments: [],
       };
 
-      setPosts(prev => [createdPost, ...prev]);
+      setPosts((prev) => [createdPost, ...prev]);
 
-      setNewPost({ text: "", location: "" });
+      setNewPost({ text: "", location: "", repost: "" });
 
       if (media) {
         setMedia(null);
@@ -96,7 +95,7 @@ function CreatePost({ user, setPosts }) {
       }
       if (video) {
         setVideo(null);
-        setvideoPreview(null);
+        setVideoPreview(null);
         URL.revokeObjectURL(videoPreview);
       }
     } catch (error) {
@@ -147,7 +146,16 @@ function CreatePost({ user, setPosts }) {
             label="Добавить локацию"
             icon="map marker alternate"
             placeholder="Где это вы находитесь?"
-         />
+          />
+
+          <Form.Input
+            value={newPost.repost}
+            name="repost"
+            onChange={handleChange}
+            label="Ссылка на оригинальный пост"
+            icon="share alternate"
+            placeholder="Вставьте ссылку на пост"
+          />
 
           <input
             ref={inputRef}
@@ -157,8 +165,8 @@ function CreatePost({ user, setPosts }) {
             type="file"
             accept="image/*"
           />
-            <input
-            ref={inputVide}
+          <input
+            ref={inputVideo}
             onChange={handleChange}
             name="video"
             style={{ display: "none" }}
@@ -169,9 +177,9 @@ function CreatePost({ user, setPosts }) {
         <div
           onClick={() => inputRef.current.click()}
           style={addStyles()}
-          onDragOver={e => dragEvent(e, true)}
-          onDragLeave={e => dragEvent(e, false)}
-          onDrop={e => {
+          onDragOver={(e) => dragEvent(e, true)}
+          onDragLeave={(e) => dragEvent(e, false)}
+          onDrop={(e) => {
             dragEvent(e, true);
 
             const droppedFile = Array.from(e.dataTransfer.files);
@@ -184,29 +192,28 @@ function CreatePost({ user, setPosts }) {
         >
           {media === null ? (
             <Icon name="image" size="big" />
-          ) :  (
+          ) : (
             <img
               style={{ height: "100px", width: "100px" }}
               src={mediaPreview}
               alt="PostImage"
             />
-          ) 
-          }
+          )}
         </div>
         <Divider hidden />
         <div
-          onClick={() => inputVide.current.click()}
+          onClick={() => inputVideo.current.click()}
           style={addStyles()}
-          onDragOver={e => dragEvent(e, true)}
-          onDragLeave={e => dragEvent(e, false)}
-          onDrop={e => {
+          onDragOver={(e) => dragEvent(e, true)}
+          onDragLeave={(e) => dragEvent(e, false)}
+          onDrop={(e) => {
             dragEvent(e, true);
 
             const droppedFile = Array.from(e.dataTransfer.files);
 
             if (droppedFile?.length > 0) {
               setVideo(droppedFile[0]);
-              setvideoPreview(URL.createObjectURL(droppedFile[0]));
+              setVideoPreview(URL.createObjectURL(droppedFile[0]));
             }
           }}
         >
@@ -219,7 +226,6 @@ function CreatePost({ user, setPosts }) {
               alt="PostVideo"
               controls
               type="video/mp4"
-              
             />
           )}
         </div>
@@ -235,6 +241,13 @@ function CreatePost({ user, setPosts }) {
               circular
               onClick={() => setShowModal(true)}
             />
+          </>
+        )}
+
+        {newPost.repost !== "" && (
+          <>
+            <Divider hidden />
+            <Embed url={newPost.repost} placeholder={mediaPreview} />
           </>
         )}
 

@@ -8,34 +8,35 @@ export const Axios = axios.create({
   baseURL: `${baseUrl}/api/posts`,
   headers: { Authorization: cookie.get("token") }
 });
-const toastError = error => toast.error(catchErrors(error));
-export const submitNewPost = async (newPost, picUrl,videoUrl) => {
-  try {
-    const { data } = await Axios.post("/", { ...newPost, picUrl,videoUrl });
 
+const toastError = error => toast.error(catchErrors(error));
+
+export const submitNewPost = async (newPost, picUrl, videoUrl, repostUrl) => {
+  try {
+    const postData = { ...newPost, picUrl, videoUrl, repostUrl};
+    const { data } = await Axios.post("/", postData);
     return { data };
   } catch (error) {
     throw catchErrors(error);
   }
 };
+
 export const deletePost = async (postId, setPosts) => {
   try {
     await Axios.delete(`/${postId}`);
     setPosts(prev => prev.filter(post => post._id !== postId));
-
     toast.info("Post deleted successfully");
   } catch (error) {
     toastError(error);
   }
 };
+
 export const likePost = async (postId, userId, setLikes, like = true) => {
   try {
     if (like) {
       await Axios.post(`/like/${postId}`);
       setLikes(prev => [...prev, { user: userId }]);
-    }
-    //
-    else if (!like) {
+    } else {
       await Axios.put(`/unlike/${postId}`);
       setLikes(prev => prev.filter(like => like.user !== userId));
     }
@@ -43,10 +44,10 @@ export const likePost = async (postId, userId, setLikes, like = true) => {
     toastError(error);
   }
 };
+
 export const postComment = async (postId, user, text, setComments, setText) => {
   try {
     const res = await Axios.post(`/comment/${postId}`, { text });
-
     const newComment = {
       _id: res.data,
       user,
@@ -59,6 +60,7 @@ export const postComment = async (postId, user, text, setComments, setText) => {
     toastError(error);
   }
 };
+
 export const deleteComment = async (postId, commentId, setComments) => {
   try {
     await Axios.delete(`/comment/${postId}/${commentId}`);
@@ -68,20 +70,20 @@ export const deleteComment = async (postId, commentId, setComments) => {
   }
 };
 
-export const repostPost = async (postId) => {
-  try {
-    await Axios.post(`/repost/${postId}`);
-    toast.success("Post reposted successfully");
-  } catch (error) {
-    toastError(error);
-  }
-};
+// export const repostPost = async (postId) => {
+//   try {
+//     await Axios.post(`/repost/${postId}`);
+//     toast.success("Post reposted successfully");
+//   } catch (error) {
+//     toastError(error);
+//   }
+// };
 
-export const deleteRepost = async (repostId) => {
-  try {
-    await Axios.delete(`/repost/${repostId}`);
-    toast.info("Repost deleted successfully");
-  } catch (error) {
-    toastError(error);
-  }
-};
+// export const deleteRepost = async (repostId) => {
+//   try {
+//     await Axios.delete(`/repost/${repostId}`);
+//     toast.info("Repost deleted successfully");
+//   } catch (error) {
+//     toastError(error);
+//   }
+// };
