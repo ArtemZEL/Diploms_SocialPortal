@@ -118,7 +118,7 @@ const NotePage = () => {
               >
                 <Card.Content>
                   <Card.Header>Заголовок: {note.title}</Card.Header>
-                  <Card.Meta>Дата: {note.date}</Card.Meta>
+                  <Card.Meta>Дата: {new Intl.DateTimeFormat('default', { dateStyle: 'full', timeStyle: 'long' }).format(new Date(note.date))}</Card.Meta>
                   <Card.Description>Описание: {note.description}</Card.Description>
                   <Card.Meta>Теги: {note.tags}</Card.Meta>
                 </Card.Content>

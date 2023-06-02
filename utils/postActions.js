@@ -25,7 +25,7 @@ export const deletePost = async (postId, setPosts) => {
   try {
     await Axios.delete(`/${postId}`);
     setPosts(prev => prev.filter(post => post._id !== postId));
-    toast.info("Post deleted successfully");
+    toast.info("Пост удален успешно");
   } catch (error) {
     toastError(error);
   }
@@ -70,20 +70,3 @@ export const deleteComment = async (postId, commentId, setComments) => {
   }
 };
 
-// export const repostPost = async (postId) => {
-//   try {
-//     await Axios.post(`/repost/${postId}`);
-//     toast.success("Post reposted successfully");
-//   } catch (error) {
-//     toastError(error);
-//   }
-// };
-
-// export const deleteRepost = async (repostId) => {
-//   try {
-//     await Axios.delete(`/repost/${repostId}`);
-//     toast.info("Repost deleted successfully");
-//   } catch (error) {
-//     toastError(error);
-//   }
-// };

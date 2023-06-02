@@ -4,6 +4,7 @@ import ChatExample from '../components/About/Example/ChatExample'
 import PostExample from '../components/About/Example/PostExample'
 import NoteExample from '../components/About/Example/NoteExample'
 import NotificationExample from '../components/About/Example/NotificationExample'
+import ProfileExample from '../components/About/Example/ProfileExample'
 
 function About() {
   return (
@@ -13,6 +14,7 @@ function About() {
       <ChatExample/>
       <NoteExample/>
       <NotificationExample/>
+      <ProfileExample/>
     </div>
 
   )

@@ -12,11 +12,13 @@ function ChatExample() {
       </div>
       <ModalInformation
         visible={isModal}
-        title={<h2 style={{textAlign:"center"}}>Заголовок</h2>}
+        title={<h2 style={{textAlign:"center"}}>Чат с другими пользователями</h2>}
         content={
           <div>
-            <p>Содержимое модального окна</p>
-            <img className="modal-image" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvjoy.cc%2Fwp-content%2Fuploads%2F2019%2F07%2F13-1.jpg&f=1&nofb=1&ipt=3d39202427c8c366104b2eaba29eb6129f34e8c43907ba31476787339ddfb22b&ipo=images" alt="Описание изображения" />
+            <b><p>Чтобы начать общение с другими пользователями, вам необходимо нажать на поле поиска и ввести имя пользователя, с которым вы хотите связаться. Затем выберите из списка появившегося пользователя, чтобы начать общение с ним.</p></b>
+            <img className="modal-image" src="https://res.cloudinary.com/dkk8nrpkj/image/upload/v1685698873/photo_5461092754596680006_x_vgseaz.jpg" />
+            <b><p>Нажмите на выбранного пользователя и отправте ему Сообщение</p></b>
+            <img className="modal-image" src="https://res.cloudinary.com/dkk8nrpkj/image/upload/v1685699071/photo_5461092754596680009_w_zkouxb.jpg" />
           </div>
         }
         footer={<button className='modal-footer-button' onClick={onClose}>Закрыть</button>}

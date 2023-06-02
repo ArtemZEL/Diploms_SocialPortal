@@ -11,7 +11,7 @@ const {
   removeFollowerNotification
 } = require("../utilsServer/notificationActions");
 
-// GET PROFILE INFO
+// GET Профиля информация
 router.get("/:username", authMiddleware, async (req, res) => {
   try {
     const { username } = req.params;
@@ -57,7 +57,7 @@ router.get("/:username", authMiddleware, async (req, res) => {
   }
 });
 
-// GET POSTS OF USER
+// GET Посты пользозвателя
 router.get(`/posts/:username`, authMiddleware, async (req, res) => {
   try {
     const { username } = req.params;
@@ -79,7 +79,7 @@ router.get(`/posts/:username`, authMiddleware, async (req, res) => {
   }
 });
 
-// GET FOLLOWERS OF USER
+// GET подписчики пользователя
 router.get("/followers/:userId", authMiddleware, async (req, res) => {
   try {
     const { userId } = req.params;
@@ -95,7 +95,7 @@ router.get("/followers/:userId", authMiddleware, async (req, res) => {
   }
 });
 
-// GET FOLLOWING OF USER
+// GET подписчиков пользователя
 router.get("/following/:userId", authMiddleware, async (req, res) => {
   try {
     const { userId } = req.params;
@@ -111,7 +111,7 @@ router.get("/following/:userId", authMiddleware, async (req, res) => {
   }
 });
 
-// FOLLOW A USER
+// ПОДПИСАТЬСЯ НА ПОЛЬЗОВАТЕЛЯ
 router.post("/follow/:userToFollowId", authMiddleware, async (req, res) => {
   try {
     const { userId } = req;
@@ -198,7 +198,7 @@ router.put("/unfollow/:userToUnfollowId", authMiddleware, async (req, res) => {
   }
 });
 
-// UPDATE PROFILE
+// ОБНОВЛЕНИЕ ПРОФИЛЯ
 router.post("/update", authMiddleware, async (req, res) => {
   try {
     const { userId } = req;
@@ -239,7 +239,7 @@ router.post("/update", authMiddleware, async (req, res) => {
   }
 });
 
-// UPDATE PASSWORD
+// ОБНОВЛЕНИЕ ПАРОЛЯ
 router.post("/settings/password", authMiddleware, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -266,7 +266,7 @@ router.post("/settings/password", authMiddleware, async (req, res) => {
   }
 });
 
-// UPDATE MESSAGE POPUP SETTINGS
+// ОБНОВИТЬ НАСТРОЙКИ ВСКРЫВАЮЩИХСЯ СООБЩЕНИЙ
 router.post("/settings/messagePopup", authMiddleware, async (req, res) => {
   try {
     const user = await UserModel.findById(req.userId);

@@ -171,11 +171,11 @@ function Signup() {
           />
 
           <div ref={requiredFieldDiv} className="error required field">
-            <label htmlFor="usernameInput">Username</label>
+            <label htmlFor="usernameInput">Имя пользователя</label>
             <div ref={usernameInputDiv} className="ui fluid left icon input">
               <input
                 ref={usernameInput}
-                placeholder="Username"
+                placeholder="Имя пользователя"
                 required
                 onChange={e => {
                   if (searchTimer) clearTimeout(searchTimer);

@@ -27,7 +27,7 @@ export const FooterMessage = () => {
         <>
           <Message attached="bottom" warning>
             <Icon name="help" />
-            Existing User? <Link href="/login">Login Here Instead</Link>
+            Уже есть аккаунт? <Link href="/login">Перейти сюда</Link>
           </Message>
           <Divider hidden />
         </>
@@ -35,12 +35,12 @@ export const FooterMessage = () => {
         <>
           <Message attached="bottom" info>
             <Icon name="lock" />
-            <Link href="/reset">Forgot Password?</Link>
+            <Link href="/reset">Забыли пароль?</Link>
           </Message>
 
           <Message attached="bottom" warning>
             <Icon name="help" />
-            New User? <Link href="/signup">Signup Here</Link> Instead
+            Новый сотрудник? <Link href="/signup">Зарегистрируйтесь</Link> 
           </Message>
         </>
       )}

@@ -82,7 +82,7 @@ function ProfileHeader({
                   )}
                 </List>
               ) : (
-                <>Нет ссылок на социальные сетиy </>
+                <>Нет ссылок на социальные сети  </>
               )}
             </Grid.Row>
           </Grid.Column>
@@ -102,7 +102,7 @@ function ProfileHeader({
                 compact
                 loading={loading}
                 disabled={loading}
-                content={isFollowing ? "Following" : "Follow"}
+                content={isFollowing ? "В друзьях" : "Подписаны"}
                 icon={isFollowing ? "check circle" : "add user"}
                 color={isFollowing ? "instagram" : "twitter"}
                 onClick={async () => {

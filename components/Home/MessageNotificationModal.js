@@ -96,7 +96,7 @@ const Instructions = ({ username }) => (
       <Icon name="help" />
       <List.Content>
         <List.Header>
-          If you do not like this popup to appear when you receive a new message:
+          Если вам не нравится, что всплывающее окно появляется при получении нового сообщения:
         </List.Header>
       </List.Content>
     </List.Item>
@@ -104,20 +104,20 @@ const Instructions = ({ username }) => (
     <List.Item>
       <Icon name="hand point right" />
       <List.Content>
-        You can disable it by going to
-        <Link href={`/${username}`}>Account</Link>
-        Page and clicking on Settings Tab.
+        Вы можете отключить его, перейдя в
+        <Link href={`/${username}`}></Link>
+        на вашу страницу и щелкнув на вкладку «Настройки».
       </List.Content>
     </List.Item>
 
     <List.Item>
       <Icon name="hand point right" />
-      Inside the menu,there is an setting named: Show New Message Popup?
+      Внутри меню есть настройка под названием: Показать всплывающее окно нового сообщения?
     </List.Item>
 
     <List.Item>
       <Icon name="hand point right" />
-      Just toggle the setting to disable/enable the Message Popup to appear.
+      Просто переключите в настройках, чтобы отключить/включить всплывающее окно сообщения.
     </List.Item>
   </List>
 );

@@ -75,8 +75,8 @@ function TokenPage() {
               icon="eye"
               type="password"
               iconPosition="left"
-              label="New Password"
-              placeholder="Enter new Password"
+              label="Новый пароль"
+              placeholder="Введите новый пароль"
               name="field1"
               onChange={handleChange}
               value={field1}
@@ -87,8 +87,8 @@ function TokenPage() {
               icon="eye"
               type="password"
               iconPosition="left"
-              label="Confirm Password"
-              placeholder="Confirm new Password"
+              label="Подтвердите пароль"
+              placeholder="Подтвердите новый пароль"
               name="field2"
               onChange={handleChange}
               value={field2}
@@ -102,7 +102,7 @@ function TokenPage() {
               icon="configure"
               type="submit"
               color="orange"
-              content="Reset"
+              content="Сброс"
             />
           </Segment>
         </Form>

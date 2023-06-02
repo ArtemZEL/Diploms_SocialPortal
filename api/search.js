@@ -3,6 +3,7 @@ const router = express.Router();
 const authMiddleware = require("../middleware/authMiddleware");
 const UserModel = require("../models/UserModel");
 
+// ПОИСК ПО ТЕКСТУ МЫ БУДЕМ ИСКАТЬ ПОЛЬЗОВАТЕЛЯ
 router.get("/:searchText", authMiddleware, async (req, res) => {
   try {
     const { searchText } = req.params;

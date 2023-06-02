@@ -14,8 +14,8 @@ function ChatExample() {
         title={<h2 style={{textAlign:"center"}}>Поиск пользователей</h2>}
         content={
         <div>
-            <p>Содержимое модального окна</p>
-            <img className="modal-image" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvjoy.cc%2Fwp-content%2Fuploads%2F2019%2F07%2F13-1.jpg&f=1&nofb=1&ipt=3d39202427c8c366104b2eaba29eb6129f34e8c43907ba31476787339ddfb22b&ipo=images" alt="Описание изображения" />
+            <b><p>Вы можете найти другого пользователя и добавить его в друзья</p></b>
+            <img className="modal-image" src="https://res.cloudinary.com/dkk8nrpkj/image/upload/v1685704677/photo_5463344554410362377_x_z8pdug.jpg" alt="Описание изображения" />
 
         </div>
         

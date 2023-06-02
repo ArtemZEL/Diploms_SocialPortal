@@ -55,7 +55,7 @@ function ResetPage() {
             icon="mail outline"
             type="email"
             iconPosition="left"
-            label="Email"
+            label="Почта"
             placeholder="Введите адрес электронной почты"
             name="email"
             onChange={e => setEmail(e.target.value)}

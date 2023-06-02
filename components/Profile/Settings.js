@@ -126,8 +126,8 @@ const UpdatePassword = ({ setSuccess, showPasswordFields }) => {
               }}
               type={field1 ? "text" : "password"}
               iconPosition="left"
-              label="Current Password"
-              placeholder="Enter current Password"
+              label="Текущий пароль"
+              placeholder="Введите ваш текущий пароль"
               name="currentPassword"
               onChange={handleChange}
               value={currentPassword}
@@ -143,8 +143,8 @@ const UpdatePassword = ({ setSuccess, showPasswordFields }) => {
               }}
               type={field2 ? "text" : "password"}
               iconPosition="left"
-              label="New Password"
-              placeholder="Enter New Password"
+              label="Новый пароль"
+              placeholder="Введите новый пароль"
               name="newPassword"
               onChange={handleChange}
               value={newPassword}
@@ -158,7 +158,7 @@ const UpdatePassword = ({ setSuccess, showPasswordFields }) => {
               icon="configure"
               type="submit"
               color="teal"
-              content="Confirm"
+              content="Изменить"
             />
 
             <Button
@@ -166,7 +166,7 @@ const UpdatePassword = ({ setSuccess, showPasswordFields }) => {
               compact
               icon="cancel"
               type="button"
-              content="Cancel"
+              content="Отмена"
               onClick={() => showPasswordFields(false)}
             />
 
