@@ -7,7 +7,7 @@ import useFormInput from "../components/hooks/useFormInput";
 import { HeaderMessage, FooterMessage } from "../components/Common/WelcomeMessage";
 import baseUrl from "../utils/baseUrl";
 import { registerUser } from "../utils/authUser";
-import uploadPic from "../utils/uploadPicToCloudinary";
+import {uploadPic} from "../utils/uploadPicToCloudinary";
 let controller = null;
 
 function Signup() {

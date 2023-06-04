@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Form, Button, Message, Divider } from "semantic-ui-react";
 import ImageDropDiv from "../Common/ImageDropDiv";
 import CommonInputs from "../Common/CommonInputs";
-import uploadPic from "../../utils/uploadPicToCloudinary";
+import { uploadPic } from "../../utils/uploadPicToCloudinary";
 import { profileUpdate } from "../../utils/profileActions";
 
 function UpdateProfile({ Profile }) {
@@ -90,7 +90,7 @@ function UpdateProfile({ Profile }) {
           color="blue"
           icon="pencil alternate"
           disabled={profile.bio === "" || loading}
-          content="Изменить"
+          content="Submit"
           type="submit"
         />
       </Form>
